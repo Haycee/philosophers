@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 16:38:39 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/09 17:12:41 by agirardi         ###   ########lyon.fr   */
+/*   Created: 2021/11/09 10:21:32 by agirardi          #+#    #+#             */
+/*   Updated: 2022/05/09 17:11:34 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/main.h"
 
-#ifndef MAIN_H
-# define MAIN_H
+int	ft_atoi(const char *nptr)
+{
+	int	i;
+	int	result;
 
-# include <limits.h>
-# include <pthread.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <sys/time.h>
-# include <unistd.h>
-
-/* main.c */
-
-/* parsing.c */
-
-int		parse_args(int argc, char **argv);
-
-/* lib */
-
-int		ft_atoi(const char *nptr);
-int		ft_isdigit(int c);
-size_t	ft_strlen(const char *str);
-
-#endif
+	i = 0;
+	result = 0;
+	while (nptr[i] >= 48 && nptr[i] <= 57)
+	{
+		result *= 10;
+		result += nptr[i] - 48;
+		i++;
+	}
+	if (result > INT_MAX)
+		return (-1);
+	return (result);
+}

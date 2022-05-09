@@ -6,14 +6,14 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/09 16:40:41 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/09 17:10:09 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	printf("test\n");
-	return 0;
+	printf("parsing : %d\n", parse_args(argc, argv));
+	return (0);
 }
