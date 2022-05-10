@@ -6,15 +6,15 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/10 23:21:53 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 23:40:28 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-// static void	monitor_threads(t_data *data);
+static void	monitor_threads(t_data *data);
 static int stop_threads(t_data *data, pthread_t *thread);
-static int	should_continue(t_philo *philo);
+static int	check_thread_state(t_philo *philo);
 
 void	*routine(void *philosopher)
 {
@@ -26,13 +26,13 @@ void	*routine(void *philosopher)
 		usleep(1000);
 	while (1)
 	{
-		if (!should_continue(philo))
+		if (!check_state(philo) == STOPPED)
 			break;
 		ft_eat(philo);
-		if (!should_continue(philo))
+		if (!check_state(philo) == STOPPED)
 			break;
 		ft_sleep(philo);
-		if (!should_continue(philo))
+		if (!check_state(philo) == STOPPED)
 			break;
 		ft_think(philo);
 	}
@@ -96,7 +96,7 @@ static int stop_threads(t_data *data, pthread_t *thread)
 	return (1);
 }
 
-static int	should_continue(t_philo *philo)
+static int	check_thread_state(t_philo *philo)
 {
 	int	state;
 
