@@ -6,7 +6,7 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/10 22:48:42 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 22:55:30 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ static void	monitor_threads(t_data *data)
 				pthread_mutex_lock(&data->check_thread_state);
 				data->thread_state = STOP;
 				stop = 1;
-				print_action(&data->philo[i], DIED);
 				pthread_mutex_unlock(&data->check_thread_state);
+				print_action(&data->philo[i], DIED);
 			}
 			pthread_mutex_unlock(&data->philo[i].check_last_meal_time);
 			if (stop == 1)
