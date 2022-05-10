@@ -6,17 +6,18 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/10 18:52:19 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 20:13:46 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
 /*
-	envoyer juste data sans philo ?
 	print erreurs ?
 	check free_structs -> *check_fork & *fork
 	supprimer ft_think si juste une ligne
+
+	tableau de fork ne sert a rien ?
 */
 
 int	main(int argc, char **argv)

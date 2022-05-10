@@ -6,21 +6,23 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/10 18:24:58 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 20:13:12 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
+static void	monitor_threads(t_data *data);
 static int stop_threads(t_data *data, pthread_t *thread);
 static int	should_continue(t_philo *philo);
+static void unlock_all_forks(t_data *data);
 
 void	*routine(void *philosopher)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)philosopher;
-	// cas particulié si 1 philo
+	// cas particulier si 1 philo
 	if (philo->id % 2 == 0)
 		usleep(1000);
 	while (1)
@@ -35,6 +37,7 @@ void	*routine(void *philosopher)
 			break;
 		ft_think(philo);
 	}
+	printf("philo %d stopped\n", philo->id + 1);
 	return ((void *)1);
 }
 
@@ -50,10 +53,49 @@ int launch_threads(t_data *data, pthread_t *thread, t_philo *philo)
 		if (pthread_create(&thread[i], NULL, &routine, &philo[i]) != 0)
 			return (0);
 	}
-	// check death
+	monitor_threads(data);
 	if (!stop_threads(data, thread))
 		return (0);
 	return (1);
+}
+
+static void	monitor_threads(t_data *data)
+{
+	int	stop;
+	int	i;
+
+	stop = 0;
+	while (1)
+	{
+		i = -1;
+		while (++i < data->number_of_philos)
+		{
+			pthread_mutex_lock(&data->philo[i].check_last_meal_time);
+				if (get_time() - data->philo[i].last_meal_time > data->time_to_die)
+				{
+					pthread_mutex_lock(&data->check_thread_state);
+					data->thread_state = STOP;
+					stop = 1;
+					unlock_all_forks(data);
+					print_action(&data->philo[i], DIED);
+					pthread_mutex_unlock(&data->check_thread_state);
+					if (stop == 1)
+						return ;
+				}
+			pthread_mutex_unlock(&data->philo[i].check_last_meal_time);
+		}
+	}
+}
+
+static void unlock_all_forks(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->number_of_philos)
+	{
+		pthread_mutex_unlock(&data->check_fork[i]);
+	}
 }
 
 static int stop_threads(t_data *data, pthread_t *thread)
@@ -72,6 +114,7 @@ static int stop_threads(t_data *data, pthread_t *thread)
 static int	should_continue(t_philo *philo)
 {
 	int	state;
+
 	pthread_mutex_lock(&philo->data->check_thread_state);
 	state = philo->data->thread_state;
 	pthread_mutex_unlock(&philo->data->check_thread_state);

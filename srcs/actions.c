@@ -6,18 +6,22 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/10 19:05:29 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 20:18:00 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-static void	take_fork(t_philo *philo);
-static void	drop_fork(t_philo *philo);
+static void	take_forks(t_philo *philo);
+static void	drop_forks(t_philo *philo);
+static int	should_continue(t_philo *philo); // debug
 
 void	ft_eat(t_philo *philo)
 {
-	take_fork(philo);
+	take_forks(philo);
+
+	if (!should_continue(philo)) // debug 
+		return ;
 
 	print_action(philo, EAT);
 
@@ -31,7 +35,7 @@ void	ft_eat(t_philo *philo)
 	philo->meal_counter++;
 	pthread_mutex_unlock(&philo->check_meal_counter);
 
-	drop_fork(philo);
+	drop_forks(philo);
 }
 
 void	ft_sleep(t_philo *philo)
@@ -45,7 +49,7 @@ void	ft_think(t_philo *philo)
 	print_action(philo, THINK);
 }
 
-static void	take_fork(t_philo *philo)
+static void	take_forks(t_philo *philo)
 {
 	if (philo->id == 0)
 	{
@@ -62,18 +66,32 @@ static void	take_fork(t_philo *philo)
 	print_action(philo, TAKEN_FORK);
 }
 
-static void	drop_fork(t_philo *philo)
+static void	drop_forks(t_philo *philo)
 {
 	if (philo->id == 0)
 	{
 		pthread_mutex_unlock(&philo->data->check_fork[philo->data->number_of_philos - 1]);
-		philo->data->fork[philo->data->number_of_philos - 1] = TAKEN;
+		philo->data->fork[philo->data->number_of_philos - 1] = FREE;
 	}
 	else
 	{
 		pthread_mutex_unlock(&philo->data->check_fork[philo->id - 1]);
-		philo->data->fork[philo->id - 1] = TAKEN;
+		philo->data->fork[philo->id - 1] = FREE;
 	}
 	pthread_mutex_unlock(&philo->data->check_fork[philo->id]);
-	philo->data->fork[philo->id] = TAKEN;
+	philo->data->fork[philo->id] = FREE;
+}
+
+
+
+/* debug */
+
+static int	should_continue(t_philo *philo)
+{
+	int	state;
+
+	pthread_mutex_lock(&philo->data->check_thread_state);
+	state = philo->data->thread_state;
+	pthread_mutex_unlock(&philo->data->check_thread_state);
+	return (state);
 }
