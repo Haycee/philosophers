@@ -6,7 +6,7 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/10 20:13:12 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 22:45:32 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	*routine(void *philosopher)
 			break;
 		ft_think(philo);
 	}
-	printf("philo %d stopped\n", philo->id + 1);
 	return ((void *)1);
 }
 
@@ -71,18 +70,18 @@ static void	monitor_threads(t_data *data)
 		while (++i < data->number_of_philos)
 		{
 			pthread_mutex_lock(&data->philo[i].check_last_meal_time);
-				if (get_time() - data->philo[i].last_meal_time > data->time_to_die)
-				{
-					pthread_mutex_lock(&data->check_thread_state);
-					data->thread_state = STOP;
-					stop = 1;
-					unlock_all_forks(data);
-					print_action(&data->philo[i], DIED);
-					pthread_mutex_unlock(&data->check_thread_state);
-					if (stop == 1)
-						return ;
-				}
+			if (get_time() - data->philo[i].last_meal_time > data->time_to_die)
+			{
+				pthread_mutex_lock(&data->check_thread_state);
+				data->thread_state = STOP;
+				stop = 1;
+				print_action(&data->philo[i], DIED);
+				unlock_all_forks(data); // ?
+				pthread_mutex_unlock(&data->check_thread_state);
+			}
 			pthread_mutex_unlock(&data->philo[i].check_last_meal_time);
+			if (stop == 1)
+			return ;
 		}
 	}
 }
