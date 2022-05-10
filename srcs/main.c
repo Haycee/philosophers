@@ -6,15 +6,15 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/10 16:40:06 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 17:46:23 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
 /*
-	int id dans struct philo ?
 	envoyer juste data sans philo ?
+	print erreurs ?
 	check free_structs -> *check_fork & *fork
 */
 

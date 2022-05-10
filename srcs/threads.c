@@ -6,13 +6,28 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/10 16:51:13 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 17:38:11 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
 static int stop_threads(t_data *data, pthread_t *thread);
+
+void	*routine(void *philosopher)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)philosopher;
+	// cas particulié si 1 philo
+	if (philo->id % 2 == 0)
+		usleep(1000);
+	while (1)
+	{
+		ft_eat(philo);
+	}
+	return ((void *)1);
+}
 
 int launch_threads(t_data *data, pthread_t *thread, t_philo *philo)
 {

@@ -1,21 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/10 16:59:50 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 17:33:32 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-void	*routine(void *philosopher)
-{
-	t_philo	*philo;
+// int	ft_eat(t_philo *philo)
+// {
 
-	philo = (t_philo *)philosopher;
-	return ((void *)1);
-}
+// }
+
+// void	ft_sleep(t_philo *philo)
+// {
+
+// }
+
+// void	ft_think(t_philo *philo)
+// {
+// }
+
+// void	take_fork(t_philo *philo)
+// {
+
+// }
+
+// void	drop_fork(t_philo *philo)
+// {
+
+// }
