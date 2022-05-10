@@ -1,43 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/10 16:12:40 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 16:23:07 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-/*
-	int id dans struct philo ?
-	envoyer juste data sans philo ?
-*/
-
-int	main(int argc, char **argv)
+void	*routine(void *philosopher)
 {
-	pthread_t	*thread;
-	t_philo		*philo;
-	t_data		data;
-	int			status;
+	t_philo	*philo;
 
-	if (!parse_args(argc, argv))
-		return (1);
-	thread = malloc(sizeof(pthread_t) * ft_atoi(argv[1]));
-	philo = malloc(sizeof(t_philo) * ft_atoi(argv[1]));
-	if (!thread || !philo)
-	{
-		free_structs(thread, philo);
-		return (1);
-	}
-	ini_structs(argc, argv, &data, philo);
-	ini_mutexes(&data);
-	status = launch_threads(&data, thread, philo);
-	stop_thread();
-	destroy_mutex(&data);
-	free_structs(thread, philo);
-	return (status);
+	philo = (t_philo *)philosopher;
+
 }

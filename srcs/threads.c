@@ -1,43 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/10 16:12:40 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 16:21:11 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-/*
-	int id dans struct philo ?
-	envoyer juste data sans philo ?
-*/
-
-int	main(int argc, char **argv)
+int launch_threads(t_data *data, pthread_t *thread, t_philo *philo)
 {
-	pthread_t	*thread;
-	t_philo		*philo;
-	t_data		data;
-	int			status;
+	int	i;
 
-	if (!parse_args(argc, argv))
-		return (1);
-	thread = malloc(sizeof(pthread_t) * ft_atoi(argv[1]));
-	philo = malloc(sizeof(t_philo) * ft_atoi(argv[1]));
-	if (!thread || !philo)
+	i = -1;
+	while (++i < data->number_of_philos)
 	{
-		free_structs(thread, philo);
-		return (1);
+		usleep(1);
+		if (pthread_create(&thread[i], NULL, &routine, &philo[i]) != 0)
+			return (0);
 	}
-	ini_structs(argc, argv, &data, philo);
-	ini_mutexes(&data);
-	status = launch_threads(&data, thread, philo);
-	stop_thread();
-	destroy_mutex(&data);
-	free_structs(thread, philo);
-	return (status);
+	return (1);
+}
+
+int stop_threads(t_data *data, pthread_t *thread, t_philo *philo);
+{
+	int i;
+
+	i = -1;
+	while (++i < data->number_of_philos)
+	{
+		if (pthread_join(thread[i], NULL) != 0)
+			return (0);
+	}
+	return (1);
 }

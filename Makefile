@@ -6,7 +6,7 @@
 #    By: agirardi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/09 16:09:47 by agirardi          #+#    #+#              #
-#    Updated: 2022/05/10 15:09:20 by agirardi         ###   ########lyon.fr    #
+#    Updated: 2022/05/10 16:23:50 by agirardi         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ LST_INCS	:=	main.h
 LST_SRCS	:=	main.c \
 				parsing.c \
 				initialization.c \
+				threads.c \
+				routine.c \
 				utils.c \
 				lib/ft_atoi.c \
 				lib/ft_isdigit.c \
@@ -32,11 +34,11 @@ INCS		:=	$(addprefix $(INC_PATH)/,$(LST_INCS))
 SRCS		:=	$(addprefix $(SRC_PATH)/,$(LST_SRCS))
 OBJS		:=	$(addprefix $(OBJ_PATH)/,$(LST_OBJS))
 
-CC			:= gcc
+CC			:=	gcc
 
-CFLAGS		:= -Wall -Wextra -Werror -pthread
+CFLAGS		:=	-Wall -Wextra -Werror -pthread
 
-RM			:= rm -rf
+RM			:=	rm -rf
 
 ERASE		:=	\033[2K\r
 BOLD		:=	\033[1m
