@@ -6,7 +6,7 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/10 16:12:40 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 16:40:06 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /*
 	int id dans struct philo ?
 	envoyer juste data sans philo ?
+	check free_structs -> *check_fork & *fork
 */
 
 int	main(int argc, char **argv)
@@ -36,7 +37,6 @@ int	main(int argc, char **argv)
 	ini_structs(argc, argv, &data, philo);
 	ini_mutexes(&data);
 	status = launch_threads(&data, thread, philo);
-	stop_thread();
 	destroy_mutex(&data);
 	free_structs(thread, philo);
 	return (status);

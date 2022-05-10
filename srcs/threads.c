@@ -6,11 +6,13 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/10 16:21:11 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 16:51:13 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
+
+static int stop_threads(t_data *data, pthread_t *thread);
 
 int launch_threads(t_data *data, pthread_t *thread, t_philo *philo)
 {
@@ -23,10 +25,13 @@ int launch_threads(t_data *data, pthread_t *thread, t_philo *philo)
 		if (pthread_create(&thread[i], NULL, &routine, &philo[i]) != 0)
 			return (0);
 	}
+	// check ici ?
+	if (!stop_threads(data, thread))
+		return (0);
 	return (1);
 }
 
-int stop_threads(t_data *data, pthread_t *thread, t_philo *philo);
+static int stop_threads(t_data *data, pthread_t *thread)
 {
 	int i;
 

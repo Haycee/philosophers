@@ -6,7 +6,7 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/10 15:28:20 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 16:38:41 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	ini_mutexes(t_data *data)
 	int i;
 
 	pthread_mutex_init(&data->check_thread_state, NULL);
+	data->check_fork = malloc(sizeof(pthread_mutex_t) * data->number_of_philos);
 	i = -1;
 	while (++i < data->number_of_philos)
 	{
