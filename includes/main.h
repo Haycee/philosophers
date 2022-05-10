@@ -6,7 +6,7 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:38:39 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/10 17:47:13 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 18:43:31 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,16 @@
 
 # define STOP 0
 # define CONTINUE 1
+
 # define TAKEN_FORK 0
 # define EAT 1
 # define SLEEP 2
 # define THINK 3
 # define DIED 4
+
+# define FREE 0
+# define TAKEN 1
+
 
 # include <limits.h>
 # include <pthread.h>
@@ -68,17 +73,15 @@ int		launch_threads(t_data *data, pthread_t *thread, t_philo *philo);
 void	*routine(void *philosopher);
 
 /* action.c */
-int		ft_eat(t_philo *philo);
-int		ft_sleep(t_philo *philo);
-int		ft_think(t_philo *philo);
-void	take_fork(t_philo *philo);
-void	drop_fork(t_philo *philo);
+void	ft_eat(t_philo *philo);
+void	ft_sleep(t_philo *philo);
+void	ft_think(t_philo *philo);
 
 /* utils.c */
 void	free_structs(pthread_t *thread, t_philo *philo);
 void	destroy_mutex(t_data *data);
 long	get_time(void);
-void	print_action(long time, int id, int action);
+void	print_action(t_philo *philo, int action);
 
 /* lib */
 int		ft_atoi(const char *nptr);
