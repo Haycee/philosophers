@@ -6,13 +6,13 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/10 22:55:30 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 23:09:18 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-static void	monitor_threads(t_data *data);
+// static void	monitor_threads(t_data *data);
 static int stop_threads(t_data *data, pthread_t *thread);
 static int	should_continue(t_philo *philo);
 
@@ -47,7 +47,6 @@ int launch_threads(t_data *data, pthread_t *thread, t_philo *philo)
 	i = -1;
 	while (++i < data->number_of_philos)
 	{
-		usleep(1);
 		if (pthread_create(&thread[i], NULL, &routine, &philo[i]) != 0)
 			return (0);
 	}
