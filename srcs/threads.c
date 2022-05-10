@@ -6,7 +6,7 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/10 22:45:32 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 22:48:42 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	monitor_threads(t_data *data);
 static int stop_threads(t_data *data, pthread_t *thread);
 static int	should_continue(t_philo *philo);
-static void unlock_all_forks(t_data *data);
 
 void	*routine(void *philosopher)
 {
@@ -76,24 +75,12 @@ static void	monitor_threads(t_data *data)
 				data->thread_state = STOP;
 				stop = 1;
 				print_action(&data->philo[i], DIED);
-				unlock_all_forks(data); // ?
 				pthread_mutex_unlock(&data->check_thread_state);
 			}
 			pthread_mutex_unlock(&data->philo[i].check_last_meal_time);
 			if (stop == 1)
 			return ;
 		}
-	}
-}
-
-static void unlock_all_forks(t_data *data)
-{
-	int	i;
-
-	i = -1;
-	while (++i < data->number_of_philos)
-	{
-		pthread_mutex_unlock(&data->check_fork[i]);
 	}
 }
 
