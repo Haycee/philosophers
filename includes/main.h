@@ -6,16 +6,15 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:38:39 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/10 18:43:31 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 23:23:11 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MAIN_H
 # define MAIN_H
 
-# define STOP 0
-# define CONTINUE 1
+# define STOPPED 0
+# define RUNNING 1
 
 # define TAKEN_FORK 0
 # define EAT 1

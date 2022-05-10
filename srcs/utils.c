@@ -6,7 +6,7 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/10 22:54:25 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 23:22:22 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	destroy_mutex(t_data *data)
 void	print_action(t_philo *philo, int action)
 {
 	pthread_mutex_lock(&philo->data->check_thread_state);
-	if (philo->data->thread_state == CONTINUE)
+	if (philo->data->thread_state == RUNNING)
 	{
 		if (action == TAKEN_FORK)
 			printf("[%lu]	%d has taken a fork\n", get_time() - philo->data->starting_time, philo->id + 1);
