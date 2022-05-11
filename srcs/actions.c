@@ -6,7 +6,7 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/11 03:04:35 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/11 03:46:53 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_eat(t_philo *philo)
 	philo->last_meal_time = get_time();
 	pthread_mutex_unlock(&philo->check_last_meal_time);
 	usleep(philo->data->time_to_eat * 1000);
+	// 5 ms ???
 	pthread_mutex_lock(&philo->check_meal_counter);
 	philo->meal_counter++;
 	pthread_mutex_unlock(&philo->check_meal_counter);

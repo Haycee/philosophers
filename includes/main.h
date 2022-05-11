@@ -6,7 +6,7 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:38:39 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/11 02:42:42 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/11 04:35:38 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ int		ini_mutexes(t_data *data);
 /* thread.c */
 int		launch_threads(t_data *data, pthread_t *thread, t_philo *philo);
 void	*routine(void *philosopher);
+
+/* monitoring.c */
+void	monitor_threads(t_data *data);
 
 /* action.c */
 void	ft_eat(t_philo *philo);

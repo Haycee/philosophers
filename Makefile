@@ -6,7 +6,7 @@
 #    By: agirardi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/09 16:09:47 by agirardi          #+#    #+#              #
-#    Updated: 2022/05/10 17:11:07 by agirardi         ###   ########lyon.fr    #
+#    Updated: 2022/05/11 04:34:02 by agirardi         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ LST_INCS	:=	main.h
 LST_SRCS	:=	main.c \
 				parsing.c \
 				initialization.c \
+				monitoring.c \
 				threads.c \
 				actions.c \
 				utils.c \
