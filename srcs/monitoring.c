@@ -6,14 +6,14 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/11 05:04:00 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/11 05:07:19 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-static int is_everyone_alive(t_data *data);
-static int is_everyone_full(t_data *data);
+static int	is_everyone_alive(t_data *data);
+static int	is_everyone_full(t_data *data);
 
 void	monitor_threads(t_data *data)
 {
@@ -29,7 +29,7 @@ void	monitor_threads(t_data *data)
 	}
 }
 
-static int is_everyone_alive(t_data *data)
+static int	is_everyone_alive(t_data *data)
 {
 	int	i;
 
@@ -48,7 +48,7 @@ static int is_everyone_alive(t_data *data)
 	return (1);
 }
 
-static int is_everyone_full(t_data *data)
+static int	is_everyone_full(t_data *data)
 {
 	int	counter;
 	int	i;
