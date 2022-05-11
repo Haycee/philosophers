@@ -6,7 +6,7 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:38:39 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/10 23:23:11 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/11 02:07:12 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ typedef struct s_philo
 int		parse_args(int argc, char **argv);
 
 /* initialization.c */
-void	ini_structs(int argc, char **argv, t_data *data, t_philo *philo);
-void	ini_mutexes(t_data *data);
+int		ini_structs(int argc, char **argv, t_data *data, t_philo *philo);
+int		ini_mutexes(t_data *data);
 
 /* thread.c */
 int		launch_threads(t_data *data, pthread_t *thread, t_philo *philo);

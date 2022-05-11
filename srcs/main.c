@@ -6,7 +6,7 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/10 20:13:46 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/11 02:07:42 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 	print erreurs ?
 	check free_structs -> *check_fork & *fork
 	supprimer ft_think si juste une ligne
-
 	tableau de fork ne sert a rien ?
 */
 
@@ -36,8 +35,11 @@ int	main(int argc, char **argv)
 		free_structs(thread, philo);
 		return (1);
 	}
-	ini_structs(argc, argv, &data, philo);
-	ini_mutexes(&data);
+	if (!ini_structs(argc, argv, &data, philo) || !ini_mutexes(&data))
+	{
+		free_structs(thread, philo);
+		return (1);
+	}
 	status = launch_threads(&data, thread, philo);
 	destroy_mutex(&data);
 	free_structs(thread, philo);
