@@ -6,7 +6,7 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:38:39 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/11 02:07:12 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/11 02:42:42 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 typedef struct s_data
 {
 	struct s_philo  *philo;
+	pthread_t		*thread;
 	pthread_mutex_t	*check_fork;
 	pthread_mutex_t	check_thread_state;
 	int				*fork;
@@ -64,7 +65,7 @@ typedef struct s_philo
 int		parse_args(int argc, char **argv);
 
 /* initialization.c */
-int		ini_structs(int argc, char **argv, t_data *data, t_philo *philo);
+int		ini_structs(int argc, char **argv, t_data *data);
 int		ini_mutexes(t_data *data);
 
 /* thread.c */
@@ -77,7 +78,7 @@ void	ft_sleep(t_philo *philo);
 void	ft_think(t_philo *philo);
 
 /* utils.c */
-void	free_structs(pthread_t *thread, t_philo *philo);
+void	free_struct(t_data *data);
 void	destroy_mutex(t_data *data);
 long	get_time(void);
 void	print_action(t_philo *philo, int action);

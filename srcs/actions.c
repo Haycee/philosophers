@@ -6,7 +6,7 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/11 01:41:48 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/11 03:04:35 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,14 @@ static void	drop_forks(t_philo *philo);
 void	ft_eat(t_philo *philo)
 {
 	take_forks(philo);
-
 	print_action(philo, EAT);
-
 	pthread_mutex_lock(&philo->check_last_meal_time);
 	philo->last_meal_time = get_time();
 	pthread_mutex_unlock(&philo->check_last_meal_time);
-
 	usleep(philo->data->time_to_eat * 1000);
-
 	pthread_mutex_lock(&philo->check_meal_counter);
 	philo->meal_counter++;
 	pthread_mutex_unlock(&philo->check_meal_counter);
-
 	drop_forks(philo);
 }
 

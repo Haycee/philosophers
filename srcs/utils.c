@@ -6,24 +6,22 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/11 02:07:04 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/11 03:04:04 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-void	free_structs(pthread_t *thread, t_philo *philo)
+void	free_struct(t_data *data)
 {
-		if (philo)
-		{
-			if (philo->data->check_fork)
-				free(philo->data->check_fork);
-			if (philo->data->fork)
-				free(philo->data->fork);
-			free(philo);
-		}
-		if (thread)
-			free(thread);
+	if (data->check_fork)
+		free(data->check_fork);
+	if (data->fork)
+		free(data->fork);
+	if (data->philo)
+		free(data->philo);
+	if (data->thread)
+		free(data->thread);
 }
 
 long	get_time(void)
@@ -54,15 +52,20 @@ void	print_action(t_philo *philo, int action)
 	if (philo->data->thread_state == RUNNING)
 	{
 		if (action == TAKEN_FORK)
-			printf("%lu %d has taken a fork\n", get_time() - philo->data->starting_time, philo->id + 1);
+			printf("%lu %d has taken a fork\n",
+				get_time() - philo->data->starting_time, philo->id + 1);
 		else if (action == EAT)
-			printf("%lu %d is eating\n", get_time() - philo->data->starting_time, philo->id + 1);
+			printf("%lu %d is eating\n",
+				get_time() - philo->data->starting_time, philo->id + 1);
 		else if (action == SLEEP)
-			printf("%lu %d is sleeping\n", get_time() - philo->data->starting_time, philo->id + 1);
+			printf("%lu %d is sleeping\n",
+				get_time() - philo->data->starting_time, philo->id + 1);
 		else if (action == THINK)
-			printf("%lu %d is thinking\n", get_time() - philo->data->starting_time, philo->id + 1);
+			printf("%lu %d is thinking\n",
+				get_time() - philo->data->starting_time, philo->id + 1);
 	}
 	if (action == DIED)
-		printf("%lu %d died\n", get_time() - philo->data->starting_time, philo->id + 1);
+		printf("%lu %d died\n",
+			get_time() - philo->data->starting_time, philo->id + 1);
 	pthread_mutex_unlock(&philo->data->check_thread_state);
 }

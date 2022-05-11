@@ -6,20 +6,22 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/11 02:03:05 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/11 03:02:21 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-int	ini_structs(int argc, char **argv, t_data *data, t_philo *philo)
-{
-	int	i;
+static void	ini_philos(t_data *data);
+int			ini_mutexes(t_data *data);
 
+int	ini_structs(int argc, char **argv, t_data *data)
+{
 	memset(data, 0, sizeof(t_data));
-	data->philo = philo;
+	data->thread = calloc(ft_atoi(argv[1]), sizeof(pthread_t));
+	data->philo = calloc(ft_atoi(argv[1]), sizeof(t_philo));
 	data->fork = calloc(ft_atoi(argv[1]), sizeof(int));
-	if (!data->fork)
+	if (!data->thread || !data->philo || !data->fork)
 		return (0);
 	data->thread_state = RUNNING;
 	data->number_of_philos = ft_atoi(argv[1]);
@@ -30,20 +32,29 @@ int	ini_structs(int argc, char **argv, t_data *data, t_philo *philo)
 		data->meal_goal = ft_atoi(argv[5]);
 	else
 		data->meal_goal = -1;
+	ini_philos(data);
+	if (!ini_mutexes(data))
+		return (0);
+	return (1);
+}
+
+static void	ini_philos(t_data *data)
+{
+	int	i;
+
 	i = -1;
 	while (++i < data->number_of_philos)
 	{
-		philo[i].data = data;
-		philo[i].last_meal_time = get_time();
-		philo[i].meal_counter = 0;
-		philo[i].id = i;
+		data->philo[i].data = data;
+		data->philo[i].last_meal_time = get_time();
+		data->philo[i].meal_counter = 0;
+		data->philo[i].id = i;
 	}
-	return (1);
 }
 
 int	ini_mutexes(t_data *data)
 {
-	int i;
+	int	i;
 
 	data->check_fork = malloc(sizeof(pthread_mutex_t) * data->number_of_philos);
 	if (!data->check_fork)

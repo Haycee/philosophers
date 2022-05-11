@@ -6,14 +6,14 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/11 01:41:48 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/11 03:10:17 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
 static void	monitor_threads(t_data *data);
-static int stop_threads(t_data *data, pthread_t *thread);
+static int	stop_threads(t_data *data, pthread_t *thread);
 static int	check_state(t_philo *philo);
 
 void	*routine(void *philosopher)
@@ -21,25 +21,26 @@ void	*routine(void *philosopher)
 	t_philo	*philo;
 
 	philo = (t_philo *)philosopher;
-	// cas particulier si 1 philo
+	if (philo->data->number_of_philos == 1)
+		usleep(philo->data->time_to_die * 1000);
 	if (philo->id % 2 == 0)
 		usleep(1000);
 	while (1)
 	{
 		if (check_state(philo) == STOPPED)
-			break;
+			break ;
 		ft_eat(philo);
 		if (check_state(philo) == STOPPED)
-			break;
+			break ;
 		ft_sleep(philo);
 		if (check_state(philo) == STOPPED)
-			break;
+			break ;
 		ft_think(philo);
 	}
 	return ((void *)1);
 }
 
-int launch_threads(t_data *data, pthread_t *thread, t_philo *philo)
+int	launch_threads(t_data *data, pthread_t *thread, t_philo *philo)
 {
 	int	i;
 
@@ -78,14 +79,14 @@ static void	monitor_threads(t_data *data)
 			}
 			pthread_mutex_unlock(&data->philo[i].check_last_meal_time);
 			if (stop == 1)
-			return ;
+				return ;
 		}
 	}
 }
 
-static int stop_threads(t_data *data, pthread_t *thread)
+static int	stop_threads(t_data *data, pthread_t *thread)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < data->number_of_philos)
