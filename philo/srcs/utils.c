@@ -6,7 +6,7 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/11 09:52:58 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/19 22:00:07 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	print_action(t_philo *philo, int action)
 	pthread_mutex_lock(&philo->data->check_thread_state);
 	if (philo->data->thread_state == RUNNING)
 	{
-		if (action == TAKEN_FORK)
+		if (action == TAKE_FORK)
 			printf("[%lu] %d has taken a fork\n",
 				get_time() - philo->data->starting_time, philo->id + 1);
 		else if (action == EAT)

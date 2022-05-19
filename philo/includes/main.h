@@ -6,7 +6,7 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:38:39 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/11 09:33:50 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/19 22:03:10 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define STOPPED 0
 # define RUNNING 1
 
-# define TAKEN_FORK 0
+# define TAKE_FORK 0
 # define EAT 1
 # define SLEEP 2
 # define THINK 3
@@ -24,7 +24,6 @@
 
 # define FREE 0
 # define TAKEN 1
-
 
 # include <limits.h>
 # include <pthread.h>
@@ -36,7 +35,7 @@
 
 typedef struct s_data
 {
-	struct s_philo  *philo;
+	struct s_philo	*philo;
 	pthread_t		*thread;
 	pthread_mutex_t	*check_fork;
 	pthread_mutex_t	check_thread_state;
@@ -59,7 +58,6 @@ typedef struct s_philo
 	int				id;
 	long			last_meal_time;
 }	t_philo;
-
 
 /* parsing.c */
 int		parse_args(int argc, char **argv);
@@ -93,6 +91,5 @@ int		ft_isdigit(int c);
 size_t	ft_strlen(const char *str);
 
 void	ft_usleep(int action_duration, t_philo *philo);
-
 
 #endif
