@@ -6,7 +6,7 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/19 22:09:10 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/19 22:11:14 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_eat(t_philo *philo)
 	pthread_mutex_lock(&philo->check_meal_counter);
 	philo->meal_counter++;
 	pthread_mutex_unlock(&philo->check_meal_counter);
-	drop_forks(philo);
+	drop_forks(philo, philo->data);
 }
 
 void	ft_sleep(t_philo *philo)
