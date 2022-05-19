@@ -6,7 +6,7 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:38:39 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/19 22:03:10 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/19 22:55:19 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # define FREE 0
 # define TAKEN 1
 
-# include <limits.h>
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -84,12 +83,12 @@ void	free_struct(t_data *data);
 void	destroy_mutex(t_data *data);
 long	get_time(void);
 void	print_action(t_philo *philo, int action);
+void	ft_usleep(int action_duration, t_philo *philo);
 
 /* lib */
-int		ft_atoi(const char *nptr);
+int		ft_atoi(char *str);
 int		ft_isdigit(int c);
 size_t	ft_strlen(const char *str);
-
-void	ft_usleep(int action_duration, t_philo *philo);
+void	*ft_calloc(size_t nmemb, size_t size);
 
 #endif

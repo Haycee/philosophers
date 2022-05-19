@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/09 10:21:32 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/19 22:54:16 by agirardi         ###   ########lyon.fr   */
+/*   Created: 2021/11/09 10:21:56 by agirardi          #+#    #+#             */
+/*   Updated: 2022/05/19 23:04:23 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/main.h"
 
-int	ft_atoi(char *str)
+static void	ft_bzero(void *s, size_t n)
 {
-	int	nbr;
-	int	i;
+	size_t	i;
 
-	nbr = 0;
 	i = 0;
-	while (str[i] && '0' <= str[i] && str[i] <= '9')
+	while (i < n)
 	{
-		if (nbr > 2147483647 || nbr < 0)
-			return (-1);
-		nbr = nbr * 10;
-		nbr = nbr + str[i] - '0';
+		((unsigned char *)s)[i] = 0;
 		i++;
 	}
-	return (nbr);
+}
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*result;
+	int		total;
+
+	total = nmemb * size;
+	result = malloc(total);
+	if (!result)
+		return (NULL);
+	ft_bzero(result, nmemb * size);
+	return (result);
 }

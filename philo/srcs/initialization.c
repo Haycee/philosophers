@@ -6,7 +6,7 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/11 03:02:21 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/19 23:01:50 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,14 @@ int			ini_mutexes(t_data *data);
 int	ini_structs(int argc, char **argv, t_data *data)
 {
 	memset(data, 0, sizeof(t_data));
-	data->thread = calloc(ft_atoi(argv[1]), sizeof(pthread_t));
-	data->philo = calloc(ft_atoi(argv[1]), sizeof(t_philo));
-	data->fork = calloc(ft_atoi(argv[1]), sizeof(int));
+	data->thread = ft_calloc(ft_atoi(argv[1]), sizeof(pthread_t));
+	data->philo = ft_calloc(ft_atoi(argv[1]), sizeof(t_philo));
+	data->fork = ft_calloc(ft_atoi(argv[1]), sizeof(int));
 	if (!data->thread || !data->philo || !data->fork)
+	{
+		printf("Error: Memory allocation failed.\n");
 		return (0);
+	}
 	data->thread_state = RUNNING;
 	data->number_of_philos = ft_atoi(argv[1]);
 	data->time_to_die = ft_atoi(argv[2]);
@@ -58,7 +61,10 @@ int	ini_mutexes(t_data *data)
 
 	data->check_fork = malloc(sizeof(pthread_mutex_t) * data->number_of_philos);
 	if (!data->check_fork)
+	{
+		printf("Error: Memory allocation failed.\n");
 		return (0);
+	}
 	pthread_mutex_init(&data->check_thread_state, NULL);
 	i = -1;
 	while (++i < data->number_of_philos)

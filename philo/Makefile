@@ -6,7 +6,7 @@
 #    By: agirardi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/09 16:09:47 by agirardi          #+#    #+#              #
-#    Updated: 2022/05/11 09:53:58 by agirardi         ###   ########lyon.fr    #
+#    Updated: 2022/05/19 23:03:00 by agirardi         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ LST_SRCS	:=	main.c \
 				utils.c \
 				lib/ft_atoi.c \
 				lib/ft_isdigit.c \
-				lib/ft_strlen.c
+				lib/ft_strlen.c \
+				lib/ft_calloc.c
 
 LST_OBJS	:=	$(LST_SRCS:.c=.o)
 
