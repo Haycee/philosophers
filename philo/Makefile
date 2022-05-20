@@ -6,7 +6,7 @@
 #    By: agirardi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/09 16:09:47 by agirardi          #+#    #+#              #
-#    Updated: 2022/05/19 23:03:00 by agirardi         ###   ########lyon.fr    #
+#    Updated: 2022/05/20 10:05:06 by agirardi         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ $(OBJ_PATH):
 $(NAME): $(OBJS)
 	printf "$(GREEN)> All the .c files from so_long have been compiled successfully !$(END)\n"
 	printf "$(BLUE)> Creating the executable file :$(END) $@\n"
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(OBJS) -o $(NAME)
 	printf "$(GREEN)> Executable file has been created successfully !$(END)\n"
 	
 clean:
