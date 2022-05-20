@@ -6,7 +6,7 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/19 22:52:04 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/20 09:49:21 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	launch_threads(t_data *data, pthread_t *thread, t_philo *philo)
 	{
 		if (pthread_create(&thread[i], NULL, &routine, &philo[i]) != 0)
 		{
-			printf("Error : Creation of a thread failed.\n");
+			printf("Error: Creation of a thread failed.\n");
 			return (0);
 		}
 	}
