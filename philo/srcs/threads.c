@@ -6,7 +6,7 @@
 /*   By: agirardi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:32:16 by agirardi          #+#    #+#             */
-/*   Updated: 2022/05/20 09:49:21 by agirardi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/20 10:00:00 by agirardi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,10 @@ static int	stop_threads(t_data *data, pthread_t *thread)
 	while (++i < data->number_of_philos)
 	{
 		if (pthread_join(thread[i], NULL) != 0)
+		{
+			printf("Error: Threads did not stop properly.\n");
 			return (0);
+		}
 	}
 	return (1);
 }
